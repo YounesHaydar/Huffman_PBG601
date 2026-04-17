@@ -12,8 +12,16 @@ def create_sorted_node_list(frequencies):
     node_list.sort(key=lambda node:node['frequency'])
     return node_list
 
-# Temporary Test Code (Delete before submitting)
-test_text = "aaabbc"
-freqs = count_frequencies(test_text)
-nodes = create_sorted_node_list(freqs)
-print(nodes)
+def build_huffman_tree(node_list):
+    while len(node_list) > 1:
+        node1 = node_list.pop(0)
+        node2 = node_list.pop(0)
+        parent_node = {
+            'frequency': node1['frequency'] + node2['frequency'],
+            'left': node1,
+            'right': node2
+        }
+        node_list.append(parent_node)
+        node_list.sort(key=lambda node: node['frequency'])
+    return node_list[0]
+
